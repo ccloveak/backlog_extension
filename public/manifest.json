@@ -1,25 +1,30 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+    "name": "Chrome Extension for Backlog",
+    "version": "0.8.0",
+    "description": "解放组员生产力",
+    "icons": {
+        "16": "images/icon.png",
+        "48": "images/icon.png",
+        "128": "images/icon.png"
     },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
+    "manifest_version": 2,
+    "page_action": {
+        "default_icon": "images/icon.png",
+        "default_title": "Backlog Extension",
+        "default_popup": "index.html"
     },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+    "background": {
+        "scripts": ["static/js/background.js"],
+        "persistent": false
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "css": ["static/css/content.css"],
+            "js": ["static/js/content.js"],
+            "run_at": "document_end"
+        }
+    ],
+    "permissions": ["tabs", "declarativeContent", "storage", "notifications"],
+    "web_accessible_resources": ["insert.js"]
 }
